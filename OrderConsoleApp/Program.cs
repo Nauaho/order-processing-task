@@ -13,7 +13,13 @@ class Program
     static void Main(string[] args)
     {
         var database = new ConcurrentDictionary<int, Order>();
-        Order[] orders = { new Order() { Id = 1, Description = "Laptop" }, new Order() { Id = 2, Description = "Phone" } };
+        List<Order> orders =
+        [
+            new Order() { Id = 1, Description = "Laptop" },
+            new Order() { Id = 2, Description = "Phone" }
+        ];
+        orders.ForEach(o => database.TryAdd(o.Id, o));
+
         var services = new ServiceCollection();
         services.AddSingleton<ILogger, ConsoleLogger>();
         services.AddSingleton(database);
