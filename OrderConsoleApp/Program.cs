@@ -13,11 +13,11 @@ class Program
     static void Main(string[] args)
     {
         var database = new ConcurrentDictionary<int, Order>();
-        List<Order> orders =
-        [
-            new Order() { Id = 1, Description = "Laptop" },
-            new Order() { Id = 2, Description = "Phone" }
-        ];
+        var orders =
+        new List<Order>(){
+            new() { Id = 1, Description = "Laptop" },
+            new() { Id = 2, Description = "Phone" }
+        };
         orders.ForEach(o => database.TryAdd(o.Id, o));
 
         var services = new ServiceCollection();

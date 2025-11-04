@@ -24,11 +24,11 @@ public class OrderService : IOrderService
         }
         catch (KeyNotFoundException e)
         {
-            _logger.LogError($"Error has been encountered: no such order with index of {orderId}", e);
+            _logger.LogError($"No such order with index of {orderId}", e);
         }
         catch (ArgumentException e)
         {
-            _logger.LogError($"Error has been encountered: orderId mustn't be less than 1", e);
+            _logger.LogError($"OrderId mustn't be less than 1. {orderId} < 1", e);
         }
         return Task.CompletedTask;
     }
