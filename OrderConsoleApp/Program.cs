@@ -35,17 +35,17 @@ class Program
 
             // Example: Simulate multiple threads processing orders
             Task[] tasks = new Task[3];
-            tasks[0] = Task.Run(() =>
+            tasks[0] = Task.Run( async () =>
             {
-                orderService.ProcessOrder(1);
+                await orderService.ProcessOrderAsync(1);
             });
-            tasks[1] = Task.Run(() =>
+            tasks[1] = Task.Run(async () =>
             {
-                orderService.ProcessOrder(2);
+                await orderService.ProcessOrderAsync(2);
             });
-            tasks[2] = Task.Run(() =>
+            tasks[2] = Task.Run(async () =>
             {
-                orderService.ProcessOrder(-1);
+                await orderService.ProcessOrderAsync(-1);
             });
             Task.WaitAll(tasks);
 

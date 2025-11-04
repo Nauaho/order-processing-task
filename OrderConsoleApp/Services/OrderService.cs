@@ -14,7 +14,7 @@ public class OrderService : IOrderService
         _logger = logger;
     }
  
-    public void ProcessOrder(int orderId)
+    public Task ProcessOrderAsync(int orderId)
     {
         _logger.LogInfo($"Start of processing order {orderId}");
         try
@@ -30,7 +30,7 @@ public class OrderService : IOrderService
         {
             _logger.LogError($"Error has been encountered: orderId mustn't be less than 1", e);
         }
-        
+        return Task.CompletedTask;
     }
 
 }
