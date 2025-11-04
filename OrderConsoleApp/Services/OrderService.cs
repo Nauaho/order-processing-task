@@ -14,12 +14,12 @@ public class OrderService : IOrderService
         _logger = logger;
     }
  
-    public Task ProcessOrderAsync(int orderId)
+    public async Task ProcessOrderAsync(int orderId)
     {
         _logger.LogInfo($"Start of processing order {orderId}");
         try
         {
-            _repository.GetOrder(orderId);
+            await _repository.GetOrderAsync(orderId);
             _logger.LogInfo($"Order {orderId} has been successfully processed");
         }
         catch (KeyNotFoundException e)
@@ -30,7 +30,6 @@ public class OrderService : IOrderService
         {
             _logger.LogError($"OrderId mustn't be less than 1. {orderId} < 1", e);
         }
-        return Task.CompletedTask;
     }
 
 }

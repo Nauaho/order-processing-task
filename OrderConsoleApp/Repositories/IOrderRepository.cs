@@ -2,5 +2,5 @@
 
 public interface IOrderRepository
 {
-    string GetOrder(int orderId);
+    Task<string> GetOrderAsync(int orderId);
 }

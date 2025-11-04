@@ -1,5 +1,4 @@
 using Moq;
-using OrderConsoleApp.Models;
 using OrderConsoleApp.Repositories;
 using OrderConsoleApp.Services;
 using OrderConsoleApp.Utilities;
@@ -25,8 +24,8 @@ public class OrderServiceTests
         var msg1 = $"Start of processing order {orderId}";
         var msg2 = $"Order {orderId} has been successfully processed";
         _orderRepository
-            .Setup(r => r.GetOrder(It.Is<int>(n => n >= 1)))
-            .Returns((int id) => It.IsAny<string>());
+            .Setup(r => r.GetOrderAsync(It.Is<int>(n => n >= 1)))
+            .ReturnsAsync( It.IsAny<string>());
         var repo = _orderRepository.Object;
         
         _logger
@@ -55,8 +54,8 @@ public class OrderServiceTests
         var msg1 = $"Start of processing order {orderId}";
         var msg2 = $"No such order with index of {orderId}";
         _orderRepository
-            .Setup(r => r.GetOrder(It.Is<int>(n => n >= 1)))
-            .Throws<KeyNotFoundException>();
+            .Setup(r => r.GetOrderAsync(It.Is<int>(n => n >= 1)))
+            .ThrowsAsync(new KeyNotFoundException());
         var repo = _orderRepository.Object;
         
         _logger
@@ -94,8 +93,8 @@ public class OrderServiceTests
         var msg1 = $"Start of processing order {orderId}";
         var msg2 = $"OrderId mustn't be less than 1. {orderId} < 1";
         _orderRepository
-            .Setup(r => r.GetOrder(It.Is<int>(n => n < 1)))
-            .Throws<ArgumentException>();
+            .Setup(r => r.GetOrderAsync(It.Is<int>(n => n < 1)))
+            .ThrowsAsync(new ArgumentException());
         var repo = _orderRepository.Object;
         
         _logger

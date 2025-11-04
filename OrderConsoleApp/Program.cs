@@ -10,7 +10,7 @@ using OrderConsoleApp.Utilities;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         var database = new ConcurrentDictionary<int, Order>();
         var orders =
@@ -47,9 +47,9 @@ class Program
             {
                 await orderService.ProcessOrderAsync(-1);
             });
-            Task.WaitAll(tasks);
+            await Task.WhenAll(tasks);
 
-            Console.WriteLine("Processing complete.");
+            Console.WriteLine("All orders processed.");
         }
     }
 }
